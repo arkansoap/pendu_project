@@ -1,8 +1,10 @@
-# flex_pendu
+# pendu_projet
 
 > A pendu with flexs implementation with vue.js
 
-## Build Setup
+## front end:
+
+### Build Setup
 
 ``` bash
 # install dependencies
@@ -16,3 +18,10 @@ npm run build
 ```
 
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+## Back end:
+
+``` bash
+uvicorn uvicorn main:app
+```
