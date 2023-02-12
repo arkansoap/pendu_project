@@ -1,0 +1,11 @@
+## Back end
+
+```bash
+uvicorn main:app 
+```
+
+## Front end
+
+```bash
+npm run dev 
+```

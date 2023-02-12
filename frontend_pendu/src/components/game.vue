@@ -1,0 +1,148 @@
+<template>
+    <div>
+        <div v-if="pendu && !pendu.endgame">
+            <div id="ToGuess">
+                <p>Mot à deviner</p>
+                <p> {{ pendu.etat }} </p>
+            </div>
+            <div id="middleContainer">
+                <div id="inputGame">
+                    <div>
+                        <input v-model="letter_proposed" />
+                        <button v-on:click="pendu.checkLettre(letter_proposed)">valider lettre</button>
+                        <h4> Informations </h4>
+                        <p>{{ pendu.message }}</p>
+                    </div>
+                </div>
+                <div id="paramsGame">
+                    <button @click="reloadPage">New Game</button>
+                    <div>
+                        <form @submit.prevent="submitForm">
+                        </form>
+                        <select v-model="selectedValue"> Item 1
+                            <option disabled value="">Please select one</option>
+                            <option>Easy</option>
+                            <option>Normal</option>
+                            <option>Hard</option>
+                        </select>
+                        <button type="submit">Envoyer</button>
+                    </div>
+
+                </div>
+            </div>
+            <div id="nbErreurs">
+                <p> Nombre d'erreurs: {{ pendu.nbErreur }}</p>
+                <img :src="image_pendu[pendu.nbErreur]" />
+            </div>
+        </div>
+        <div v-if="pendu && pendu.endgame">
+            <div v-if="pendu.loose">
+                <h1> You Loose !!</h1>
+                <h3> Le mot était: {{ pendu.mot.motStr }}</h3>
+                <img :src=image_loose />
+            </div>
+            <div v-if="!pendu.loose">
+                <h1> You Win !!</h1>
+                <h3> Le mot était: {{ pendu.mot.motStr }}</h3>
+                <img :src=image_win />
+            </div>
+            <ul>
+                <li v-for="def in definition">{{ def }}</li>
+            </ul>
+        </div>
+    </div>
+
+</template>
+
+<script>
+import axios from '../plugins/axios';
+import { Pendu } from '../class/pendu';
+import 'regenerator-runtime/runtime';
+
+export default {
+
+    data() {
+        return {
+            selectedValue: null,
+            pendu: null,
+            letter_proposed: "",
+            image_pendu: [
+                "../src/assets/pendu1.jpg",
+                "../src/assets/pendu2.jpg",
+                "../src/assets/pendu3.jpg"
+            ],
+            image_loose: "../src/assets/penduEnd.jpg",
+            image_win: "../src/assets/penduWin.jpg",
+            definition: null
+        }
+    },
+    methods: {
+        reloadPage() {
+            window.location.reload();
+        },
+        submitForm() {
+            // Envoyer la requête HTTP ici, en utilisant la propriété `selectedValue` comme donnée
+            axios.post('/api/submit', { value: this.selectedValue }).then(response => {
+                console.log(response.data);
+            })
+        },
+    },
+    async created() {
+        // const params = new params() ## params à rentrer ds l objet pendu ## pris en compte qd on fait newgame... ?
+        const pendu = await new Pendu();
+        this.pendu = pendu;
+        const definition = await axios.get(`definitions?mot=${pendu.mot.motStr}`);
+        this.definition = definition.data;
+        console.log(this.definition)
+    }
+
+}
+
+</script>
+
+<style scoped>
+div {
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    margin: 5px;
+}
+
+#ToGuess {
+
+    border-width: 4px;
+    border-style: double;
+    border-color: white;
+    padding: 5px;
+    font-size: x-large;
+}
+
+ul {
+    list-style-type: none;
+    /* remove the bullet point */
+}
+
+#middleContainer {
+    display: flex;
+}
+
+#inputGame {
+    flex: 2;
+    border-width: 4px;
+    border-style: double;
+    border-color: white;
+    margin-right: 5px;
+    /* takes up 1/2 of the container's width */
+}
+
+#paramsGame {
+    flex: 1;
+    border-width: 4px;
+    border-style: double;
+    border-color: white;
+    margin-left: 5px;
+    padding: 10px;
+    /* takes up 1/2 of the container's width */
+}
+</style>
