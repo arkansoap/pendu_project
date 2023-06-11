@@ -1,5 +1,5 @@
 postgre_settings = {
-    "pgser": "postgres",
+    "pguser": "postgres",
     "pgpwd": "Fightclub1983",
     "pghost": "localhost",
     "pgport": "5433",
