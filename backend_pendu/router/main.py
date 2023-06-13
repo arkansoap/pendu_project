@@ -44,4 +44,11 @@ async def get_definition(
 
 @app.put("/submit")
 async def receive_form(value: str):
+    print(value)
     return {"received_value": value}
+
+
+# TODO: table params + connexion db
+# @app.get("/params")
+# async def get_params():
+#     return {"params": "params"}

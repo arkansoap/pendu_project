@@ -15,3 +15,5 @@ students = Table(
     Column("date", String),
 )
 meta.create_all(engine)
+
+# TODO: table params

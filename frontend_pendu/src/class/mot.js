@@ -4,6 +4,7 @@ import 'regenerator-runtime/runtime';
 export class Mot {
     constructor() {
         return (async () => {
+            // this.params = await this.getParams();
             this.motStr = await this.selectionMot2();
             console.log(`From class Mot, this.motStr: ${this.motStr}`);
             this.lenMot = this.motStr.length;
@@ -18,6 +19,11 @@ export class Mot {
         return mot
     }
 
+    // async getParams() {
+    //     let result = await axios.get("/params");
+    //     return params
+    // }
+
     diffMot() {
         if (this.motStr.length > 6) {
             this.diffLenMot = 2;
@@ -27,3 +33,5 @@ export class Mot {
         this.coeffDiffMot = this.diffLenMot;
     }
 }
+
+
