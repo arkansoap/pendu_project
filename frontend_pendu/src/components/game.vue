@@ -17,15 +17,13 @@
                 <div id="paramsGame">
                     <button @click="reloadPage">New Game</button>
                     <div>
-                        <form @submit.prevent="submitForm">
-                        </form>
                         <select v-model="selectedValue"> Item 1
                             <option disabled value="">Please select one</option>
                             <option>Easy</option>
                             <option>Normal</option>
                             <option>Hard</option>
                         </select>
-                        <button type="submit">Envoyer</button>
+                        <button @click="submitDiff">Envoyer</button>
                     </div>
 
                 </div>
@@ -51,7 +49,6 @@
             </ul>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -63,7 +60,7 @@ export default {
 
     data() {
         return {
-            selectedValue: null,
+            selectedValue: "",
             pendu: null,
             letter_proposed: "",
             image_pendu: [
@@ -80,15 +77,16 @@ export default {
         reloadPage() {
             window.location.reload();
         },
-        submitForm() {
-            // Envoyer la requête HTTP ici, en utilisant la propriété `selectedValue` comme donnée
-            axios.post('/api/submit', { value: this.selectedValue }).then(response => {
-                console.log(response.data);
-            })
-        },
+        submitDiff() {
+            const data = { value: this.selectedValue }
+            axios.put('/submit', null, { params: { value: JSON.stringify(this.selectedValue) } }
+            );
+        }
     },
     async created() {
         // const params = new params() ## params à rentrer ds l objet pendu ## pris en compte qd on fait newgame... ?
+        // params à une valeur par défaut. On peu la changer pr la partie suivante 
+        // parames est donné au cinstructeur Pendu pour déterminer certaines valeur : nb d'essai, choix mot, ...
         const pendu = await new Pendu();
         this.pendu = pendu;
         const definition = await axios.get(`definitions?mot=${pendu.mot.motStr}`);

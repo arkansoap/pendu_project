@@ -23,5 +23,5 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 ## Back end:
 
 ``` bash
-uvicorn uvicorn main:app
+uvicorn main:app
 ```

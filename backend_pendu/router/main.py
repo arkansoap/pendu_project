@@ -1,10 +1,16 @@
 from fastapi import FastAPI
 from fastapi import Query, Form
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 import random
 from larousse_api import larousse
 
 app = FastAPI()
+
+
+class SubmitPayload(BaseModel):
+    value: str
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -36,6 +42,6 @@ async def get_definition(
     return liste_def
 
 
-@app.post("/api/submit")
-async def receive_form(value: str = Form(...)):
+@app.put("/submit")
+async def receive_form(value: str):
     return {"received_value": value}
