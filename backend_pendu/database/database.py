@@ -26,18 +26,11 @@ def get_engine_from_settings():
 
 
 def get_session():
-    engine = engine = get_engine(
-        user=settings["pguser"],
-        password=settings["pgpwd"],
-        host=settings["pghost"],
-        port=settings["pgport"],
-        db=settings["pgdb"],
-    )
+    engine = get_engine_from_settings()
     session = sessionmaker(bind=engine)()
     return session
 
 
 if __name__ == "__main__":
-
     session = get_session()
     print(session)
