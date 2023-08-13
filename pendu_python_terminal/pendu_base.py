@@ -34,7 +34,7 @@ class Mot:
         # self.mot_easyVersion = ...
 
     def selection_mot(self):
-        with open("pendu/liste.de.mots.francais.frgut.txt", encoding="utf-8") as file:
+        with open("liste.de.mots.francais.frgut.txt", encoding="utf-8") as file:
             liste_mot = file.readlines()
         self.mot = random.choice(liste_mot).strip("\n")
         return self.mot

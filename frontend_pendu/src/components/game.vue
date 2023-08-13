@@ -19,9 +19,9 @@
                     <div>
                         <select v-model="selectedValue"> Item 1
                             <option disabled value="">Please select one</option>
-                            <option>Easy</option>
-                            <option>Normal</option>
-                            <option>Hard</option>
+                            <option>easy</option>
+                            <option>medium</option>
+                            <option>hard</option>
                         </select>
                         <button @click="submitDiff">Envoyer</button>
                     </div>

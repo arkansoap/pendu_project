@@ -4,6 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import random
 from larousse_api import larousse
+from fucntions.params_difficulty import update_params
+from database.database import get_session
 
 app = FastAPI()
 
@@ -28,7 +30,7 @@ async def root():
 
 @app.get("/selectionMot")
 async def selection_mot():
-    with open("listeMot.txt", encoding="utf-8") as file:
+    with open("router/listeMot.txt", encoding="utf-8") as file:
         liste_mot = file.readlines()
     mot = random.choice(liste_mot).strip("\n")
     return {"mot": mot}
@@ -44,7 +46,9 @@ async def get_definition(
 
 @app.put("/submit")
 async def receive_form(value: str):
-    print(value)
+    print(value.strip('"'))
+    plop = update_params(db=get_session(), id=2, level=value.strip('"'))
+    print(plop)
     return {"received_value": value}
 
 

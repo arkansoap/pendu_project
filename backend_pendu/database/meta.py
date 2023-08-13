@@ -1,12 +1,11 @@
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
-
-from database import get_session, get_engine_from_settings
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Boolean
+from database.database import get_session, get_engine_from_settings
 
 
 engine = get_engine_from_settings()
 meta = MetaData()
 
-students = Table(
+score = Table(
     "score",
     meta,
     Column("id", Integer, primary_key=True),
@@ -14,6 +13,17 @@ students = Table(
     Column("score", Integer),
     Column("date", String),
 )
+
+difficulty = Table(
+    "params",
+    meta,
+    Column("id", Integer, primary_key=True),
+    Column("easy", Boolean, default=False),
+    Column("medium", Boolean, default=False),
+    Column("hard", Boolean, default=False),
+)
+
 meta.create_all(engine)
 
-# TODO: table params
+print("done")
+# TODO: table params avec toutes les potions de difficultés
