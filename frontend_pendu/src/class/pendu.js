@@ -56,4 +56,5 @@ export class Pendu {
             this.loose = false;
         }
     }
+
 }

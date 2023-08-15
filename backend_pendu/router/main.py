@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import random
 from larousse_api import larousse
-from fucntions.params_difficulty import update_params
+from fucntions.params_difficulty import update_params, get_params
 from database.database import get_session
 
 app = FastAPI()
@@ -52,7 +52,7 @@ async def receive_form(value: str):
     return {"received_value": value}
 
 
-# TODO: table params + connexion db
-# @app.get("/params")
-# async def get_params():
-#     return {"params": "params"}
+@app.get("/params")
+async def get_params():
+    diff = get_params(db=get_session(), id=2)
+    return {"params": diff}

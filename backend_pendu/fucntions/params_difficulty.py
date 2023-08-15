@@ -42,6 +42,25 @@ def update_params(db: Session, id: int, level: str):
         print("Row with id=1 not found.")
 
 
+def get_params(db: Session, id: int):
+    # Query the row with the specified id
+    row_to_retrieve = db.query(Difficulty).filter_by(id=id).first()
+
+    if row_to_retrieve:
+        # Check which level is set to True
+        if row_to_retrieve.easy:
+            return "easy"
+        elif row_to_retrieve.medium:
+            return "medium"
+        elif row_to_retrieve.hard:
+            return "hard"
+        else:
+            return "No level selected"
+    else:
+        return "Row with id={} not found.".format(id)
+
+
 if __name__ == "__main__":
     db = get_session()
     update_params(db, id=2, level="medium")
+    print(get_params(db, id=2))
