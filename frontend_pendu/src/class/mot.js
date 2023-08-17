@@ -8,9 +8,7 @@ export class Mot {
         return (async () => {
             this.params = await new Params()
             this.motStr = await this.selectionMot();
-            console.log(`From class Mot, this.motStr: ${this.motStr}`);
             this.lenMot = this.motStr.length;
-            this.diffMot();
             return this;
         })();
     }
@@ -24,17 +22,20 @@ export class Mot {
     async selectionMot() {
         let result = await this.getMot();
 
-        if (this.params.diff_dict.word_diff === 3) {
+        if (this.params.diff_dict.word_diff === 1) {
+            console.log("N'importe quel mot fera l'affaire");
             return result;
         }
 
         while (true) {
             const uniqueCharacters = new Set(result);
 
-            if (this.params.diff_dict.word_diff === 2 && uniqueCharacters.size < 5) {
-                result = this.getNewWord();
-            } else if (this.params.diff_dict.word_diff === 3 && uniqueCharacters.size < 8) {
-                result = this.getNewWord();
+            if (this.params.diff_dict.word_diff === 2 && uniqueCharacters.size < 8) {
+                console.log("Mot trop facile, on en cherche un autre moyen");
+                result = await this.getMot();
+            } else if (this.params.diff_dict.word_diff === 3 && uniqueCharacters.size < 11) {
+                console.log("Mot trop facile, on en cherche un autre difficile");
+                result = await this.getMot();
             } else {
                 break; // Conditions are respected, exit the loop
             }

@@ -5,13 +5,14 @@ export class Pendu {
         return (async () => {
 
             this.mot = await new Mot();
-            console.log(`from class pendu, this.mot: ${this.mot}`);
             console.log(this.mot)
             this.etat = "*".repeat(this.mot.lenMot);
             console.log(this.etat);
+            console.log(this.mot.params.diff_dict.tentatives)
             this.nbErreur = 0;
             this.endgame = false;
             this.loose = null;
+            this.score = 0;
             this.message = "Bonjour";
 
             return this;
@@ -40,18 +41,23 @@ export class Pendu {
         } else if (this.mot.motStr.includes(lettreProposee)) {
             this.replaceLettreInGuess(lettreProposee);
         } else if (!this.mot.motStr.includes(lettreProposee)) {
-            //this.affichePendu(params);
             this.nbErreur += 1;
         }
         this.check_endgame()
     }
 
     check_endgame() {
-        if (this.nbErreur === 3) {
+        if (this.nbErreur === this.mot.params.diff_dict.tentatives) {
+            this.score=0;
+            console.log("score dessous");
+            console.log(this.score);
             this.endgame = true;
             this.loose = true;
         }
         if (this.etat === this.mot.motStr) {
+            this.score=(this.mot.params.diff_dict.word_diff + (this.mot.params.diff_dict.tentatives/1)) * (this.mot.params.diff_dict.tentatives - this.nbErreur);
+            console.log("score dessous");
+            console.log(this.score)
             this.endgame = true;
             this.loose = false;
         }

@@ -53,6 +53,6 @@ async def receive_form(value: str):
 
 
 @app.get("/params")
-async def get_params():
+async def get_diff_params():
     diff = get_params(db=get_session(), id=2)
     return {"params": diff}
