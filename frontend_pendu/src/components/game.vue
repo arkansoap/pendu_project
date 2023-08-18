@@ -25,7 +25,9 @@
                         </select>
                         <button @click="submitDiff">Envoyer</button>
                     </div>
-
+                    <div>
+                        <p>Level: {{ this.pendu.mot.params.diff.data.params }}</p>
+                    </div>
                 </div>
             </div>
             <div id="nbErreurs">
@@ -47,7 +49,11 @@
             <ul>
                 <li v-for="def in definition">{{ def }}</li>
             </ul>
+            <div>
+                Un nom pour la postérité: <input v-model="player_pseudo" />
+            </div>
         </div>
+
     </div>
 </template>
 
@@ -70,7 +76,8 @@ export default {
             ],
             image_loose: "../src/assets/penduEnd.jpg",
             image_win: "../src/assets/penduWin.jpg",
-            definition: null
+            definition: null,
+            player_pseudo: ""
         }
     },
     methods: {

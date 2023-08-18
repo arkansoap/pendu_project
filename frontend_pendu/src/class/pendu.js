@@ -48,14 +48,14 @@ export class Pendu {
 
     check_endgame() {
         if (this.nbErreur === this.mot.params.diff_dict.tentatives) {
-            this.score=0;
+            this.score = 0;
             console.log("score dessous");
             console.log(this.score);
             this.endgame = true;
             this.loose = true;
         }
         if (this.etat === this.mot.motStr) {
-            this.score=(this.mot.params.diff_dict.word_diff + (this.mot.params.diff_dict.tentatives/1)) * (this.mot.params.diff_dict.tentatives - this.nbErreur);
+            this.score = (this.mot.params.diff_dict.word_diff + (1 / this.mot.params.diff_dict.tentatives)) * (10 - this.mot.params.diff_dict.tentatives - this.nbErreur);
             console.log("score dessous");
             console.log(this.score)
             this.endgame = true;

@@ -39,7 +39,7 @@ def update_params(db: Session, id: int, level: str):
         db.commit()
         print("Row updated successfully.")
     else:
-        print("Row with id=1 not found.")
+        print(f"Row with id={id} not found.")
 
 
 def get_params(db: Session, id: int):

@@ -48,7 +48,6 @@ async def get_definition(
 async def receive_form(value: str):
     print(value.strip('"'))
     plop = update_params(db=get_session(), id=2, level=value.strip('"'))
-    print(plop)
     return {"received_value": value}
 
 
