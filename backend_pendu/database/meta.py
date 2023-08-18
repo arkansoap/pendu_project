@@ -1,6 +1,15 @@
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Boolean
+from sqlalchemy import (
+    create_engine,
+    MetaData,
+    Table,
+    Column,
+    Integer,
+    String,
+    Boolean,
+    Date,
+)
 from database.database import get_session, get_engine_from_settings
-
+from datetime import date
 
 engine = get_engine_from_settings()
 meta = MetaData()
@@ -11,7 +20,7 @@ score = Table(
     Column("id", Integer, primary_key=True),
     Column("player_name", String),
     Column("score", Integer),
-    Column("date", String),
+    Column("date", Date, default=date.today()),
 )
 
 difficulty = Table(
