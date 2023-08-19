@@ -36,6 +36,7 @@
             </div>
         </div>
         <div v-if="pendu && pendu.endgame">
+
             <div v-if="pendu.loose">
                 <h1> You Loose !!</h1>
                 <h3> Le mot était: {{ pendu.mot.motStr }}</h3>
@@ -46,12 +47,18 @@
                 <h3> Le mot était: {{ pendu.mot.motStr }}</h3>
                 <img :src=image_win />
             </div>
-            <ul>
-                <li v-for="def in definition">{{ def }}</li>
-            </ul>
             <div>
-                Un nom pour la postérité: <input v-model="player_pseudo" />
+                <div>Ton score: {{ pendu.score }}</div>
+                <div>Un nom pour la postérité: <input v-model="player_pseudo" /> <button @click="saveScore">save it</button>
+                </div>
             </div>
+            <div>
+                <h3>Définition</h3>
+                <ul>
+                    <li v-for="def in definition">{{ def }}</li>
+                </ul>
+            </div>
+
         </div>
 
     </div>
@@ -85,20 +92,18 @@ export default {
             window.location.reload();
         },
         submitDiff() {
-            const data = { value: this.selectedValue }
             axios.put('/submit', null, { params: { value: JSON.stringify(this.selectedValue) } }
-            );
+            )
+        },
+        saveScore() {
+            axios.put('/savescore', { value: this.pendu.score, name: this.player_pseudo })
         }
     },
     async created() {
-        // const params = new params() ## params à rentrer ds l objet pendu ## pris en compte qd on fait newgame... ?
-        // params à une valeur par défaut. On peu la changer pr la partie suivante 
-        // parames est donné au cinstructeur Pendu pour déterminer certaines valeur : nb d'essai, choix mot, ...
         const pendu = await new Pendu();
         this.pendu = pendu;
         const definition = await axios.get(`definitions?mot=${pendu.mot.motStr}`);
         this.definition = definition.data;
-        console.log(this.definition)
     }
 
 }

@@ -5,13 +5,17 @@ from pydantic import BaseModel
 import random
 from larousse_api import larousse
 from fucntions.params_difficulty import update_params, get_params
+from fucntions.high_score import save_score
 from database.database import get_session
 
 app = FastAPI()
 
+from pydantic import BaseModel
 
-class SubmitPayload(BaseModel):
-    value: str
+
+class ScoreData(BaseModel):
+    value: int
+    name: str
 
 
 app.add_middleware(
@@ -47,7 +51,7 @@ async def get_definition(
 @app.put("/submit")
 async def receive_form(value: str):
     print(value.strip('"'))
-    plop = update_params(db=get_session(), id=2, level=value.strip('"'))
+    update_params(db=get_session(), id=2, level=value.strip('"'))
     return {"received_value": value}
 
 
@@ -55,3 +59,9 @@ async def receive_form(value: str):
 async def get_diff_params():
     diff = get_params(db=get_session(), id=2)
     return {"params": diff}
+
+
+@app.put("/savescore")
+async def save_highscore(score_data: ScoreData):
+    score = save_score(db=get_session(), pseudo=score_data.name, score=score_data.value)
+    return score

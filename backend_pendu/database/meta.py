@@ -4,6 +4,7 @@ from sqlalchemy import (
     Table,
     Column,
     Integer,
+    Float,
     String,
     Boolean,
     Date,
@@ -19,7 +20,7 @@ score = Table(
     meta,
     Column("id", Integer, primary_key=True),
     Column("player_name", String),
-    Column("score", Integer),
+    Column("score", Float),
     Column("date", Date, default=date.today()),
 )
 
@@ -35,4 +36,3 @@ difficulty = Table(
 meta.create_all(engine)
 
 print("done")
-# TODO: table params avec toutes les potions de difficultés

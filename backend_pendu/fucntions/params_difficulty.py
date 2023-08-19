@@ -1,6 +1,6 @@
 from database.database import get_session
 from sqlalchemy.orm import Session
-from database.models import Difficulty  # Import the Difficulty model from your module
+from database.models import Difficulty
 
 
 # if no row in the table

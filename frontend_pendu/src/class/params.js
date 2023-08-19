@@ -4,7 +4,6 @@ export class Params {
     constructor() {
         return (async () => {
             this.diff = await this.getParams();
-            console.log(this.diff.data.params);
             this.diff_dict = await this.getDictParams()
 
             return this;
