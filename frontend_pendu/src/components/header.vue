@@ -5,14 +5,13 @@
             <nav>
                 <ul>
                     <li><router-link to="/" exact>Acceuil</router-link></li>
-                    <li>High Score</li>
-                    <li>Rules</li>
+                    <li><router-link to="/highscore" exact>High Score</router-link></li>
+                    <li><router-link to="/rules" exact> Rules</router-link> </li>
                     <li><router-link to="/game" exact>Game</router-link></li>
                 </ul>
             </nav>
         </header>
     </div>
-
 </template>
 
 
