@@ -13,7 +13,8 @@
     "axios": "^1.2.2",
     "regenerator-runtime": "^0.13.11",
     "vue": "^2.5.11",
-    "vue-router": "^3.6.5"
+    "vue-router": "^3.6.5",
+    "vuetify": "^2.5.11"
   },
   "browserslist": [
     "> 1%",

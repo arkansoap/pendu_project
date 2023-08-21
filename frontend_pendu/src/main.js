@@ -6,7 +6,7 @@ import Vuetify from 'vuetify'; // Import Vuetify
 // import 'vuetify/dist/vuetify.min.css'; // Import Vuetify CSS
 
 Vue.use(VueRouter);
-// Vue.use(Vuetify); // Use Vuetify
+Vue.use(Vuetify); // Use Vuetify
 
 const router = new VueRouter({
   routes: Routes,
@@ -16,6 +16,6 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   router: router,
-  // vuetify: new Vuetify(), // Initialize Vuetify instance
+  vuetify: new Vuetify(), // Initialize Vuetify instance
   render: h => h(App)
 })

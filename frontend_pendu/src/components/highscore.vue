@@ -1,36 +1,42 @@
 <template>
     <div>
-        <!-- <div>
-            <h1> High Score Board</h1>
-            <img :src="image_acceuil" width="400px" />
-        </div> -->
         <div>
-            <v-data-table :headers="headers" :items="users" :search="search"></v-data-table>
+            <img :src="image_acceuil" width="400px" />
+            <!-- <h1> High Score Board</h1> -->
+        </div>
+        <div class="table-container">
+            <v-data-table :headers="headers" :items="users" :search="search" hide-default-footer
+                class="v-data-table"></v-data-table>
         </div>
     </div>
 </template>
     
-
-
-
 <script>
+import axios from '../plugins/axios';
 export default {
 
     data() {
         return {
             image_acceuil: "../src/assets/highscore.png",
             headers: [
-                { text: 'Name', value: 'name' },
-                { text: 'Email', value: 'email' },
+                { text: 'pseudo', value: 'player_name' },
+                { text: 'Score', value: 'score' },
             ],
             users: [
-                { id: 1, name: 'John Doe', email: 'john@example.com' },
-                { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-                { id: 3, name: 'Bob Johnson', email: 'bob@example.com' },
             ],
             search: '',
 
         }
+    },
+    methods: {
+        async getScore() {
+            const { data } = await axios.get('/highscore');
+            console.log(data.users);
+            this.users = data.users;
+        }
+    },
+    created() {
+        this.getScore();
     }
 }
 </script >
@@ -42,6 +48,16 @@ div {
     padding: 5px;
     text-align: center;
     margin: 5px;
+}
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
 }
 </style>
 
