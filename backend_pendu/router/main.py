@@ -7,7 +7,10 @@ from larousse_api import larousse
 from fucntions.params_difficulty import update_params, get_params
 from fucntions.high_score import save_score, get_score
 from database.database import get_session
+from environs import Env
 
+env = Env()
+env.read_env()
 
 app = FastAPI()
 
@@ -19,9 +22,18 @@ class ScoreData(BaseModel):
     name: str
 
 
+if env == "prod":
+    origins = [
+        "http://pendu.arkansoap.tech",
+    ]
+else:
+    origins = [
+        "http://localhost:8080",
+    ]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
