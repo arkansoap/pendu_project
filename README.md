@@ -32,12 +32,55 @@ npm run dev
 - créer une base de données avec le nom "pendu" avec l'utilisateur postgres
 - créer les tables avec le script sql dans le répertoire backend_pendu.meta.py
 
-## Déploiement
+## Déploiement inital
 
-/etc/nginx/sites-available/
-/usr/share/nginx/
+- python (+ module requis), uvicorn, gunicorn et postgresql installés
+- back et front sont 2 app distinctes
+- sudo systemctl start nginx
+- sudo systemctl enable nginx
 
-A Remplir ...
+0. Maj du code pr le back
+
+- On créée un repo git /home/pendu_project qu'on link avec le remote (on devrait importer seulement le back mais confusion lors de la création du proket en local)
+
+1. Backend (voir fichier deploy_back.bash):
+
+- Dans backend pendu on écrit le fichier de conf gunicorn_conf.py
+- Créer et editer le fichier pour le service
+- Start & enable the service:
+
+  - $ sudo systemctl start pendu
+  - $ sudo systemctl enable pendu
+  - $ sudo systemctl status pendu
+
+- Fichier conf Nginx
+- link site enable
+
+2. BDD
+   -Comme ci dessus mais sur le serveur de prod au lieu de le faire sur sa machine locale
+
+   - maj les 2 fichiers de conf pour postgre
+
+3. Frontend
+
+- on se place en local ds le repo frontend.
+- On se place ds le repo frontend-pendu et build le projet avec la commande 'npm run build' (qui crée le repo dist)
+  - penser à changer l adresse back sur le quel il pointe (adresse du back de prod au lieu de localhost)
+- Dans /usr/share/nginx/ on copie le repos dist précédemment créé
+- Dans /etc/nginx/sites-available/ on écrit le fochier de conf
+- link site-enable
+
+## Deploiement suite maj du cod
+
+### Maj du code
+
+cd /home/pendu_project
+git switch main
+git pull
+
+### Restart nginx
+
+sudo systemctl restart nginx
 
 ## TODO
 

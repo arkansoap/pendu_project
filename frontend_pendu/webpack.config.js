@@ -9,6 +9,11 @@ module.exports = {
     filename: 'build.js'
   },
   module: {
+    plugins: [
+      new CopyWebpackPlugin([
+        { from: './index/html', to: 'relative/path/to/dest/' }
+      ])
+    ],
     rules: [
       {
         test: /\.css$/,
@@ -76,3 +81,4 @@ if (process.env.NODE_ENV === 'production') {
     })
   ])
 }
+
