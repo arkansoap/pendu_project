@@ -68,23 +68,15 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name arkansoap.tech;
+    # virtual server name i.e. domain name #
+    server_name pendu.arkansoap.tech;
+      
+    location / {
 
-    root /usr/share/nginx/tech.arkansoap/html;
+        proxy_pass http://unix:/home/pendu_project/backend_pendu/gunicorn.sock;
 
-    index index.php index.html index.htm index.nginx-debian.html;
-
-    access_log  /var/log/nginx/www_access.log;
-    error_log   /var/log/nginx/www_error.log;
-
-    location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
     }
 
-    location ~ /\.ht {
-        deny all;
-    }
 }
 EOF
 

@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
-
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 module.exports = {
   entry: ['./src/main.js'], // "babel-polyfill"
   output: {
@@ -9,11 +10,6 @@ module.exports = {
     filename: 'build.js'
   },
   module: {
-    plugins: [
-      new CopyWebpackPlugin([
-        { from: './index/html', to: 'relative/path/to/dest/' }
-      ])
-    ],
     rules: [
       {
         test: /\.css$/,
@@ -70,15 +66,26 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   sourceMap: true,
-    //   compress: {
-    //     warnings: false
-    //   }
-    // }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    }),
+    // below is the plugin you need to add
+    new HtmlWebpackPlugin({
+      filename: path.resolve(__dirname, './dist/index.html'), // the path where is the `index.html` generated.
+      template: 'index.html',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      },
+    }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    })
+    }),
+    new UglifyJSPlugin()
   ])
 }
-

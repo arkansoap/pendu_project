@@ -21,7 +21,7 @@ server {
     location / {
 
         root /usr/share/nginx/tech.arkansoap.penduflex/dist;
-        try_files $uri  /index.html;
+        try_files $uri  /build.js;
     }    
     error_log  /var/log/nginx/vue-app-error.log;
     access_log /var/log/nginx/vue-app-access.log;
