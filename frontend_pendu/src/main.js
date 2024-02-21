@@ -1,21 +1,42 @@
-import Vue from 'vue'
+import { createApp } from 'vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import { createVuetify } from 'vuetify'
+import { provideAxios } from './plugins/axios.js';
 import App from './App.vue'
-import VueRouter from 'vue-router'
-import Routes from "./routes"
-import Vuetify from 'vuetify'; // Import Vuetify
-// import 'vuetify/dist/vuetify.min.css'; // Import Vuetify CSS
 
-Vue.use(VueRouter);
-Vue.use(Vuetify); // Use Vuetify
+import game from './components/game.vue'
+import acceuil from './components/acceuil.vue'
+import rules from './components/rules.vue'
+import highscore from './components/highscore.vue'
 
-const router = new VueRouter({
-  routes: Routes,
-  mode: 'history'
+const routes = [
+    { path: '/', component: acceuil },
+    { path: '/game', component: game },
+    { path: '/rules', component: rules },
+    { path: '/highscore', component: highscore }
+];
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
 });
 
-new Vue({
-  el: '#app',
-  router: router,
-  vuetify: new Vuetify(), // Initialize Vuetify instance
-  render: h => h(App)
-})
+
+// Create app
+const app = createApp(App);
+
+// Provide axios
+provideAxios();
+
+
+// Create Vuetify
+const vuetify = createVuetify({
+  // configuration options
+});
+
+// Use router and Vuetify
+app.use(router);
+app.use(vuetify);
+
+// Mount app
+app.mount('#app');
