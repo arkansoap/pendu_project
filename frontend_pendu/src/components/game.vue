@@ -108,7 +108,7 @@ export default {
   async created() {
     const pendu = await new Pendu();
     this.pendu = pendu;
-    const definition = await axios.get(`definitions?mot=${pendu.mot.motStr}`);
+    const definition = await axios.get(`definitions/?mot=${pendu.mot.motStr}`);
     this.definition = definition.data;
   },
 };
