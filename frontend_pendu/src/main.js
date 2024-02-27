@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import { createVuetify } from 'vuetify'
+import { createVuetify } from 'vuetify';
+
 import axiosPlugin from './plugins/axios.js'; 
 
 import App from './App.vue'

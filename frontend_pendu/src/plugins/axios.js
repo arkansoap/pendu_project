@@ -2,7 +2,8 @@
 import { inject } from 'vue';
 import axios from 'axios';
 
-const apiUrl = 'http://penduflex.arkansoap.tech/';
+const apiUrl = 'http://pendu.arkansoap.tech/';
+// const apiUrl = 'http://localhost:8000/';
 
 const axiosIns = axios.create({
     baseURL: apiUrl,

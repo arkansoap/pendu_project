@@ -61,6 +61,12 @@ def get_params(db: Session, id: int):
 
 
 if __name__ == "__main__":
+    # db = get_session()
+    # update_params(db, id=2, level="medium")
+    # print(get_params(db, id=2))
+
     db = get_session()
-    update_params(db, id=2, level="medium")
+    init_params(db, level="easy")
+    print(get_params(db, id=1))
+    init_params(db, level="medium")
     print(get_params(db, id=2))

@@ -31,7 +31,11 @@ class ScoreData(BaseModel):
 #         "http://localhost:8080",
 #     ]
 
-origins = ["http://penduflex.arkansoap.tech", "http://localhost:8081"]
+origins = [
+    "http://penduflex.arkansoap.tech",
+    "http://localhost:8081",
+    "http://localhost:8080",
+]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,

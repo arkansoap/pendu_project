@@ -30,7 +30,8 @@ npm run dev
 
 - installer postgresql
 - créer une base de données avec le nom "pendu" avec l'utilisateur postgres
-- créer les tables avec le script sql dans le répertoire backend_pendu.meta.py
+- créer les tables avec le script dans le répertoire backend_pendu.meta.py
+- utiliser le script params_difficulty pour initialiser les paramètres de difficulté ou les updater
 
 ## Déploiement inital
 
@@ -72,15 +73,17 @@ npm run dev
 
 ## Deploiement suite maj du cod
 
-### Maj du code
+- Maj du code back
+  cd /home/pendu_project
+  git switch main
+  git pull
 
-cd /home/pendu_project
-git switch main
-git pull
+- maj du code front
+  npm run build -> en local
+  scp dist repor sur le serveur
 
-### Restart nginx
-
-sudo systemctl restart nginx
+- Restart nginx
+  sudo systemctl restart nginx
 
 ## TODO
 

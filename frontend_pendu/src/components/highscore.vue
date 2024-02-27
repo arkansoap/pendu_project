@@ -2,16 +2,22 @@
   <div>
     <div>
       <img :src="image_acceuil" width="400px" />
-      <!-- <h1> High Score Board</h1> -->
     </div>
     <div class="table-container">
-      <!-- <v-data-table
-        :headers="headers"
-        :items="users"
-        :search="search"
-        hide-default-footer
-        class="v-data-table"
-      ></v-data-table> -->
+      <table class="table-auto w-full">
+        <thead>
+          <tr>
+            <th class="px-4 py-2">Pseudo</th>
+            <th class="px-4 py-2">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(user, index) in users" :key="index">
+            <td class="border px-4 py-2">{{ user.player_name }}</td>
+            <td class="border px-4 py-2">{{ user.score }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -23,12 +29,7 @@ export default {
   data() {
     return {
       image_acceuil: imgHighscore,
-      headers: [
-        { text: "pseudo", value: "player_name" },
-        { text: "Score", value: "score" },
-      ],
       users: [],
-      search: "",
     };
   },
   methods: {
@@ -61,5 +62,23 @@ div {
   padding: 10px;
   border: 1px solid white;
   border-radius: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background-color: black; /* Make all table cells black */
+  color: white; /* Make text color white */
+}
+
+th {
+  background-color: black; /* Make header cells black */
+  color: white; /* Make header text color white */
 }
 </style>
