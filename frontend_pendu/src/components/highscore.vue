@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import axios from "../plugins/axios";
+import { axiosIns as axios } from "../plugins/axios";
 import imgHighscore from "@/assets/highscore.png";
 export default {
   data() {

@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import axios from "../plugins/axios";
+import { axiosIns as axios } from "../plugins/axios";
 import { Pendu } from "../class/pendu";
 import "regenerator-runtime/runtime";
 import pendu1 from "@/assets/pendu1.jpg";

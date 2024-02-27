@@ -8,6 +8,8 @@ cd /home/pendu_project
 git switch main 
 git pull 
 
+# Process .env.prod 
+
 # Deploy FastAPI using Gunicorn
 
 ## Fichier de conf pour gunicorn
@@ -34,7 +36,7 @@ errorlog =  '/home/pendu_project/backend_pendu/error_log'
 EOF
 
 ## Fichier du service gunicorn
-cat > /etc/systemd/system/pendu.service <<EOF
+cat > /etc/systemd/system/pendu.service << EOF
 [Unit]
 
 Description=Gunicorn Daemon for FastAPI Demo Application

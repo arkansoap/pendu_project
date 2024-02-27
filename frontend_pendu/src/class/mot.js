@@ -1,4 +1,4 @@
-import axios from '../plugins/axios';
+import { axiosIns as axios } from '../plugins/axios';
 import 'regenerator-runtime/runtime'; // A effacer ?? 
 
 import { Params } from "./params"
