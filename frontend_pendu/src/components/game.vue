@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import axios from "../plugins/axios";
+import { axiosIns as axios } from "../plugins/axios";
 import { Pendu } from "../class/pendu";
 import "regenerator-runtime/runtime";
 import pendu1 from "@/assets/pendu1.jpg";
@@ -108,7 +108,7 @@ export default {
   async created() {
     const pendu = await new Pendu();
     this.pendu = pendu;
-    const definition = await axios.get(`definitions?mot=${pendu.mot.motStr}`);
+    const definition = await axios.get(`definitions/?mot=${pendu.mot.motStr}`);
     this.definition = definition.data;
   },
 };

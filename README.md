@@ -72,15 +72,17 @@ npm run dev
 
 ## Deploiement suite maj du cod
 
-### Maj du code
+- Maj du code back
+  cd /home/pendu_project
+  git switch main
+  git pull
 
-cd /home/pendu_project
-git switch main
-git pull
+-maj du code front
+npm run build -> en local
+scp dist repor sur le serveur
 
-### Restart nginx
-
-sudo systemctl restart nginx
+- Restart nginx
+  sudo systemctl restart nginx
 
 ## TODO
 

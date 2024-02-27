@@ -22,15 +22,16 @@ class ScoreData(BaseModel):
     name: str
 
 
-if env == "prod":
-    origins = [
-        "http://pendu.arkansoap.tech",
-    ]
-else:
-    origins = [
-        "http://localhost:8080",
-    ]
+# if env == "prod":
+#     origins = [
+#         "http://pendu.arkansoap.tech",
+#     ]
+# else:
+#     origins = [
+#         "http://localhost:8080",
+#     ]
 
+origins = ["http://penduflex.arkansoap.tech", "http://localhost:8081"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -42,7 +43,7 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    return {"message": "Hello world !!"}
+    return {"message": "Hello world on the flex !!"}
 
 
 @app.get("/selectionMot")

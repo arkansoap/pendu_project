@@ -1,7 +1,8 @@
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import { createVuetify } from 'vuetify'
-import { provideAxios } from './plugins/axios.js';
+import axiosPlugin from './plugins/axios.js'; 
+
 import App from './App.vue'
 
 import game from './components/game.vue'
@@ -25,8 +26,6 @@ const router = createRouter({
 // Create app
 const app = createApp(App);
 
-// Provide axios
-provideAxios();
 
 
 // Create Vuetify
@@ -35,6 +34,7 @@ const vuetify = createVuetify({
 });
 
 // Use router and Vuetify
+app.use(axiosPlugin);
 app.use(router);
 app.use(vuetify);
 

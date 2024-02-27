@@ -1,4 +1,4 @@
-import axios from '../plugins/axios';
+import { axiosIns as axios } from '../plugins/axios';
 import 'regenerator-runtime/runtime'; // A effacer ?? 
 
 import { Params } from "./params"
@@ -7,6 +7,7 @@ export class Mot {
     constructor() {
         return (async () => {
             this.params = await new Params()
+            console.log("this.params", this.params)
             this.motStr = await this.selectionMot();
             this.lenMot = this.motStr.length;
             return this;

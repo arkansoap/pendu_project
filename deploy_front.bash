@@ -9,22 +9,15 @@ npm run build
 
 sudo scp -r  /home/tfuchez/Bureau/projets/pendu_project/frontend_pendu/dist/ 5.182.18.114:/usr/share/nginx/tech.arkansoap.penduflex
 
-# Commande effectiées sur le serveur distant
-cat > /etc/nginx/sites-available/tech.arkansoap.penduflex << EOF
+cat > /etc/nginx/sites-available/tech.arkansoap.penduflex.conf << EOF
 server {
-    listen      80;
-    server_name arkansoap.tech;    
-    charset utf-8;
-    root    /usr/share/nginx/tech.arkansoap.penduflex/dist;
-    index   index.html;
-    #Always serve index.html for any request
-    location / {
+    listen 80;
+    server_name penduflex.arkansoap.tech;
 
+    location / {
         root /usr/share/nginx/tech.arkansoap.penduflex/dist;
-        try_files $uri  /build.js;
-    }    
-    error_log  /var/log/nginx/vue-app-error.log;
-    access_log /var/log/nginx/vue-app-access.log;
+        try_files \$uri \$uri/ /index.html;
+    }
 }
 EOF
 

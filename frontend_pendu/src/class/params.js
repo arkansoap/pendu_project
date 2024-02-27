@@ -1,4 +1,5 @@
-import axios from '../plugins/axios';
+// params.js
+import { axiosIns as axios } from '../plugins/axios';
 
 export class Params {
     constructor() {
