@@ -28,6 +28,10 @@ npm run dev
 
 ### BDD
 
+- sudo -u postgres psql
+- CREATE DATABASE pendu;
+- \l pour vérifier que la base a bien été créée
+
 - installer postgresql
 - créer une base de données avec le nom "pendu" avec l'utilisateur postgres
 - créer les tables avec le script dans le répertoire backend_pendu.meta.py

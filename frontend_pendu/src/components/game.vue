@@ -111,6 +111,14 @@ export default {
     const definition = await axios.get(`definitions/?mot=${pendu.mot.motStr}`);
     this.definition = definition.data;
   },
+  watch: {
+    letter_proposed(newVal) {
+      if (newVal.length > 1) {
+        this.letter_proposed = newVal.slice(0, 1);
+      }
+      this.letter_proposed = this.letter_proposed.toLowerCase();
+    },
+  },
 };
 </script>
 
